@@ -75,6 +75,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 
 
+
 import com.icddrb.app.maternalhealth.R;
 import com.icddrb.app.maternalhealth.BaseActivity;
 import com.icddrb.app.maternalhealth.CommonStaticClass;
@@ -2234,691 +2235,468 @@ public class ParentActivity extends BaseActivity implements FormListener {
 	}
 
 	// frmcombobox part
-	private void Load_UIFrmComboBox(final ViewGroup v) {
-		if (users != null && users.size() > 0) {
-			users.clear();
-		}
-		if (userIDs != null && userIDs.size() > 0) {
-			userIDs.clear();
-		}
-		// TODO Auto-generated method stub
-		qqq = (TextView) v.findViewById(R.id.qqq);
-		op = new Options();
-
-		if (CommonStaticClass.langBng) {
-			if (CommonStaticClass.questionMap
-					.get(CommonStaticClass.currentSLNo).getQdescbng().length() > 0) {
-				Typeface font = Typeface.createFromAsset(getAssets(),
-						"Siyam Rupali ANSI.ttf");
-				qqq.setTypeface(font);
+		private void Load_UIFrmComboBox(final ViewGroup v) {
+			if (users != null && users.size() > 0) {
+				users.clear();
 			}
-			;
-			qqq.setText(CommonStaticClass.questionMap
-					.get(CommonStaticClass.currentSLNo).getQdescbng().length() > 0 ? CommonStaticClass.questionMap
-					.get(CommonStaticClass.currentSLNo).getQdescbng()
-					: CommonStaticClass.questionMap.get(
-							CommonStaticClass.currentSLNo).getQdesceng());
-		} else {
-			qqq.setTypeface(null);
-			qqq.setText(CommonStaticClass.questionMap.get(
-					CommonStaticClass.currentSLNo).getQdesceng());
-		}
-
-		checkBoxHolder = (LinearLayout) v.findViewById(R.id.checkBoxHolder);
-		checkBoxHolder.removeAllViews();
-		LinearLayout.LayoutParams lnlParams = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.FILL_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		LinearLayout.LayoutParams layoutParamForSpin = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-
-		LinearLayout ln = new LinearLayout(this);
-		ln.setOrientation(LinearLayout.HORIZONTAL);
-
-		// Add spinner control
-		final Spinner spinner = new Spinner(this);
-		layoutParamForSpin.weight = 1;
-		ln.addView(spinner, 0, layoutParamForSpin);
-		// added by zaman
-		if (CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
-				.getQvar().equalsIgnoreCase("userid")
-				|| CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("memberid")
-				|| CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_3")
-
-				|| CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_7Dist")
-
-				|| CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_7Thana")
-
-				|| CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_7Union")
-
-				|| CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_7Vill")
-
-				|| CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("c1_8aa")) {
-			// for Reading data from a specific table like user, member etc.
-			Cursor mCursor = null;
-			String sql = "";
-			users = new ArrayList<String>();
-			users.add("");
-			userIDs = new ArrayList<String>();
-			userIDs.add("");
-
-			try {
-				if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("q9ss"))
-					sql = String.format("Select * from tblDisease");
-				else if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q19aa")
-						|| CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q21aa"))
-					sql = String.format("Select * from tblCountry");
-
-				else if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q17aa"))
-
-					/*
-					 * sql = String.format(
-					 * "select * from tblCluster where Clusterid = (select clusterid from tblMainQues where dataid =  '%s')"
-					 * ,CommonStaticClass.dataId);
-					 */
-					sql = String
-							.format("select * from District Order By DistName");
-				else if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("q1_1"))
-					sql = String
-							.format("select ID,Name from tblUser where Active = 'Y'");
-
-				else if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("upaaaa"))
-
-					/*
-					 * sql = String.format(
-					 * "select * from tblCluster where Clusterid = (select clusterid from tblMainQues where dataid =  '%s')"
-					 * ,CommonStaticClass.dataId);
-					 */
-					sql = String
-							.format("select * from tblUpazila where Distcode = (select q10 from tblMainQuesMc where dataid =  '%s')",
-									CommonStaticClass.dataId);
-
-				else if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("c1_8aaa"))
-					// sql = "Select * from tblCluster";
-					sql = String.format("select * from tblOccupation",
-							CommonStaticClass.dataId);
-				// //////////////////////////////////////////////////////////////////////////////
-
-				else if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_3")) {
-					sql = String
-							.format("select CaptionEng from tblOptions where QID = 'Q1_3'");
-				} else if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_7Dist")) {
-					sql = String
-							.format("select distinct district from tblcensus");
-				} else if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_7Thana")) {
-					Cursor mCursor1 = null;
-					String disName = "";
-					sql = "Select Q1_7Dist from tblMainQues where dataid='"
-							+ CommonStaticClass.dataId + "'";
-
-					try {
-						mCursor1 = dbHelper.getQueryCursor(sql);
-						if (mCursor1.moveToFirst()) {
-							do {
-								disName = mCursor1.getString(mCursor1
-										.getColumnIndex("Q1_7Dist"));
-							} while (mCursor1.moveToNext());
-						}
-					} catch (Exception e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					} finally {
-						if (mCursor1 != null)
-							mCursor1.close();
-					}
-					sql = "select distinct upazila from tblcensus where district = '"
-							+ disName + "'";
-				} else if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_7Union")) {
-					Cursor mCursor1 = null;
-					String disName = "";
-					String thanaName = "";
-					sql = "Select Q1_7Dist,Q1_7Thana from tblMainQues where dataid='"
-							+ CommonStaticClass.dataId + "'";
-
-					try {
-						mCursor1 = dbHelper.getQueryCursor(sql);
-						if (mCursor1.moveToFirst()) {
-							do {
-								disName = mCursor1.getString(mCursor1
-										.getColumnIndex("Q1_7Dist"));
-								thanaName = mCursor1.getString(mCursor1
-										.getColumnIndex("Q1_7Thana"));
-							} while (mCursor1.moveToNext());
-						}
-					} catch (Exception e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					} finally {
-						if (mCursor1 != null)
-							mCursor1.close();
-					}
-					sql = "select distinct UnionNm from tblcensus where district = '"
-							+ disName + "' and upazila = '" + thanaName + "'";
-
-				} else if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_7Vill")) {
-					Cursor mCursor1 = null;
-					String disName = "";
-					String thanaName = "";
-					String unionName = "";
-					sql = "Select Q1_7Dist,Q1_7Thana,Q1_7Union from tblMainQues where dataid='"
-							+ CommonStaticClass.dataId + "'";
-
-					try {
-						mCursor1 = dbHelper.getQueryCursor(sql);
-						if (mCursor1.moveToFirst()) {
-							do {
-								disName = mCursor1.getString(mCursor1
-										.getColumnIndex("Q1_7Dist"));
-								thanaName = mCursor1.getString(mCursor1
-										.getColumnIndex("Q1_7Thana"));
-								unionName = mCursor1.getString(mCursor1
-										.getColumnIndex("Q1_7Union"));
-							} while (mCursor1.moveToNext());
-						}
-					} catch (Exception e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					} finally {
-						if (mCursor1 != null)
-							mCursor1.close();
-					}
-					sql = "select distinct Village from tblcensus where district = '"
-							+ disName
-							+ "' and upazila = '"
-							+ thanaName
-							+ "' and UnionNm = '" + unionName + "'";
-
-				}
-
-				// /////////////////////////////////////////////////////////////
-				mCursor = dbHelper.getQueryCursor(sql);
-				if (mCursor.moveToFirst()) {
-					do {
-						if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q17aa"))
-
-						{
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("DistCode"))
-									+ " : "
-									+ mCursor.getString(mCursor
-											.getColumnIndex("DistName")));
-							userIDs.add(mCursor.getString(mCursor
-									.getColumnIndex("DistCode")));
-
-						} else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("memberid")) {
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("memberid"))
-									+ " : "
-									+ mCursor.getString(mCursor
-											.getColumnIndex("mname")));
-							userIDs.add(mCursor.getString(mCursor
-									.getColumnIndex("memberid")));
-
-						} else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q19aa")
-								|| CommonStaticClass.questionMap
-										.get(CommonStaticClass.currentSLNo)
-										.getQvar().equalsIgnoreCase("Q21aa")) {
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("Countrycode"))
-									+ " : "
-									+ mCursor.getString(mCursor
-											.getColumnIndex("CountryName")));
-							userIDs.add(mCursor.getString(mCursor
-									.getColumnIndex("Countrycode")));
-
-						}
-						// for question 1_2 to 1_6
-
-						else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("q1_3aaa")) {
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("Clusterid"))
-									+ " : "
-									+ mCursor.getString(mCursor
-											.getColumnIndex("Clusterid")));
-							userIDs.add(mCursor.getString(mCursor
-									.getColumnIndex("Clusterid")));
-
-						} else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("q10aaaa")
-								|| CommonStaticClass.questionMap
-										.get(CommonStaticClass.currentSLNo)
-										.getQvar().equalsIgnoreCase("q12a")) {
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("ID"))
-									+ " : "
-									+ mCursor.getString(mCursor
-											.getColumnIndex("Name")));
-							userIDs.add(mCursor.getString(mCursor
-									.getColumnIndex("ID")));
-
-						} else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("q1_1")) {
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("ID"))
-									+ " : "
-									+ mCursor.getString(mCursor
-											.getColumnIndex("Name")));
-							userIDs.add(mCursor.getString(mCursor
-									.getColumnIndex("ID")));
-
-						} else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("upaaaa")) {
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("UpazilaCode"))
-									+ " : "
-									+ mCursor.getString(mCursor
-											.getColumnIndex("UpazilaName")));
-							userIDs.add(mCursor.getString(mCursor
-									.getColumnIndex("UpazilaCode")));
-
-						} else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("c1_8aaa")) {
-
-							if (CommonStaticClass.langBng) {
-								users.add(mCursor.getString(mCursor
-										.getColumnIndex("Code"))
-										+ " : "
-										+ mCursor.getString(mCursor
-												.getColumnIndex("OccupationBng")));
-
-							} else {
-								users.add(mCursor.getString(mCursor
-										.getColumnIndex("Code"))
-										+ " : "
-										+ mCursor.getString(mCursor
-												.getColumnIndex("Occupation")));
-							}
-
-							userIDs.add(mCursor.getString(mCursor
-									.getColumnIndex("Code")));
-
-						} else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q1_7Dist")) {
-
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("district")));
-						}
-
-						else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q1_7Thana")) {
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("upazila")));
-						}
-
-						else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q1_7Union")) {
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("UnionNm")));
-
-						} else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q1_7Vill")) {
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("Village")));
-						} else if (CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q1_3")) {
-							users.add(mCursor.getString(mCursor
-									.getColumnIndex("CaptionEng")));
-						}
-					} while (mCursor.moveToNext());
-				}
-				if (CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_7Vill")) {
-					users.add("Other");
-				}
-				adapterForCombo = new ArrayAdapter(this,
-						android.R.layout.simple_spinner_item, users);
-				adapterForCombo
-						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-				// adapterForCombo.setDropDownViewResource(R.layout.checkedspintextview);
-				spinner.setAdapter(adapterForCombo);
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if (mCursor != null)
-					mCursor.close();
+			if (userIDs != null && userIDs.size() > 0) {
+				userIDs.clear();
 			}
-
-		} else // applicable when Spinner is loaded from options table
-		{
-			op = CommonStaticClass.findOptionsForThisQuestion(
-					dbHelper,
-					CommonStaticClass.questionMap.get(
-							CommonStaticClass.currentSLNo).getQvar());
-			op.capBngList.add(0, "");
-			op.capEngList.add(0, "");
-			op.codeList.add(0, -1);
+			// TODO Auto-generated method stub
+			qqq = (TextView) v.findViewById(R.id.qqq);
+			op = new Options();
 
 			if (CommonStaticClass.langBng) {
-				adapterForCombo = new SpinAdapter(this, op.capBngList, true);
-
+				if (CommonStaticClass.questionMap
+						.get(CommonStaticClass.currentSLNo).getQdescbng().length() > 0) {
+					Typeface font = Typeface.createFromAsset(getAssets(),
+							"Siyam Rupali ANSI.ttf");
+					qqq.setTypeface(font);
+				}
+				;
+				qqq.setText(CommonStaticClass.questionMap
+						.get(CommonStaticClass.currentSLNo).getQdescbng().length() > 0 ? CommonStaticClass.questionMap
+						.get(CommonStaticClass.currentSLNo).getQdescbng()
+						: CommonStaticClass.questionMap.get(
+								CommonStaticClass.currentSLNo).getQdesceng());
 			} else {
-				adapterForCombo = new ArrayAdapter(this,
-						android.R.layout.simple_spinner_item, op.capEngList);
-
+				qqq.setTypeface(null);
+				qqq.setText(CommonStaticClass.questionMap.get(
+						CommonStaticClass.currentSLNo).getQdesceng());
 			}
-			adapterForCombo
-					.setDropDownViewResource(CommonStaticClass.langBng ? R.layout.checkedspintextview
-							: android.R.layout.simple_spinner_dropdown_item);
-			spinner.setAdapter(adapterForCombo);
-			// spinner.setOnItemSelectedListener(new spinItemSelectListener());
 
-		}
-		// Slected Index change event of Spinner
-		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+			checkBoxHolder = (LinearLayout) v.findViewById(R.id.checkBoxHolder);
+			checkBoxHolder.removeAllViews();
+			LinearLayout.LayoutParams lnlParams = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.FILL_PARENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT);
+			new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT);
+			LinearLayout.LayoutParams layoutParamForSpin = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.WRAP_CONTENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT);
 
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int pos, long id) {
-				// TODO Auto-generated method stub
-				if (parent.getItemAtPosition(pos).toString().length() > 0) {
+			LinearLayout ln = new LinearLayout(this);
+			ln.setOrientation(LinearLayout.HORIZONTAL);
+
+			// Add spinner control
+			final Spinner spinner = new Spinner(this);
+			layoutParamForSpin.weight = 1;
+			ln.addView(spinner, 0, layoutParamForSpin);
+			// added by imtiaz khan
+			if (CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
+					.getQvar().equalsIgnoreCase("q1") 
+					) {
+
+				// for Reading data from a specific table like user, member etc.
+				Cursor mCursor = null;
+				String sql = "";
+				users = new ArrayList<String>();
+				users.add("");
+				userIDs = new ArrayList<String>();
+				userIDs.add("");
+
+				try {
+					
 					if (CommonStaticClass.questionMap
 							.get(CommonStaticClass.currentSLNo).getQvar()
-							.equalsIgnoreCase("userid")
+							.equalsIgnoreCase("q1")
+
+							) {
+						sql = String.format("select * from tblUser");
+					}
+					
+					
+					mCursor = dbHelper.getQueryCursor(sql);
+					if (mCursor.moveToFirst()) {
+						do {
+							if (CommonStaticClass.questionMap
+									.get(CommonStaticClass.currentSLNo).getQvar()
+									.equalsIgnoreCase("q1"))
+
+							{
+								users.add(mCursor.getString(mCursor
+										.getColumnIndex("ID"))
+										+ " : "
+										+ mCursor.getString(mCursor
+												.getColumnIndex("Name")));
+								userIDs.add(mCursor.getString(mCursor
+										.getColumnIndex("ID")));
+
+							}
+
+							
+						} while (mCursor.moveToNext());
+					}
+					// Code: imtiaz khan 
+
+					if (CommonStaticClass.langBng
+							&& (CommonStaticClass.questionMap
+									.get(CommonStaticClass.currentSLNo).getQvar()
+									.equalsIgnoreCase("q011")
+									|| CommonStaticClass.questionMap
+											.get(CommonStaticClass.currentSLNo)
+											.getQvar()
+											.equalsIgnoreCase("cropfishcode1") || CommonStaticClass.questionMap
+									.get(CommonStaticClass.currentSLNo).getQvar()
+									.equalsIgnoreCase("cropfishcode2"))) {
+						adapterForCombo = new SpinAdapter(this, users, true);
+
+						adapterForCombo
+								.setDropDownViewResource(CommonStaticClass.langBng ? R.layout.checkedspintextview
+										: android.R.layout.simple_spinner_dropdown_item);
+						spinner.setAdapter(adapterForCombo);
+
+					} else {
+
+						adapterForCombo = new ArrayAdapter(this,
+								android.R.layout.simple_spinner_item, users);
+						adapterForCombo
+								.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+						spinner.setAdapter(adapterForCombo);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if (mCursor != null)
+						mCursor.close();
+				}
+
+			} 
+			
+			
+			else // applicable when Spinner is loaded from options table
+			{
+
+				if (CommonStaticClass.questionMap
+						.get(CommonStaticClass.currentSLNo).getQvar()
+						.equalsIgnoreCase("qd")
+						|| CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("qdia")
+						|| CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("qv")
+						|| CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("qlns")
+
+						|| CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("qffq")
+
+						|| CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("q408SL")
+						|| CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("q412SL")
+						|| CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("q627SL")
+						|| CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("q628SL")
+						|| CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("q632SL")) {
+					int iCount = 0;
+					if (CommonStaticClass.questionMap
+							.get(CommonStaticClass.currentSLNo).getQvar()
+							.equalsIgnoreCase("qd")
 							|| CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("Q17aa")
+									.get(CommonStaticClass.currentSLNo).getQvar()
+									.equalsIgnoreCase("qlns")
 
 							|| CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("Q19aa")
+									.get(CommonStaticClass.currentSLNo).getQvar()
+									.equalsIgnoreCase("qffq")
+
+							/*
+							 * || CommonStaticClass.questionMap
+							 * .get(CommonStaticClass.currentSLNo).getQvar()
+							 * .equalsIgnoreCase("qdia")
+							 */
+
 							|| CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("q1_1")
-							|| CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("q1_5aa")
-							|| CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("c1_8aa")
-							|| CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("c1_10aa")) {
-						sResCode = parent
-								.getItemAtPosition(pos)
-								.toString()
-								.substring(
-										0,
-										(parent.getItemAtPosition(pos)
-												.toString().lastIndexOf(":") - 1));
+									.get(CommonStaticClass.currentSLNo).getQvar()
+									.equalsIgnoreCase("qv")
+
+					) {
+						iCount = Integer.parseInt(CommonStaticClass.getSkip(
+								"q4019b", "tblMainQues", dbHelper));
 					} else if (CommonStaticClass.questionMap
 							.get(CommonStaticClass.currentSLNo).getQvar()
-							.equalsIgnoreCase("Q1_7Dist")
-							|| CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("Q1_7Thana")
-							|| CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("Q1_7Union")
-							|| CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("Q1_7Vill")
-							|| CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("Q1_3")) {
-						sResCode = parent.getItemAtPosition(pos).toString();
-					} else
-						sResCode = op.codeList.get(pos).toString();
+							.equalsIgnoreCase("qdia")) {
+						iCount = Integer.parseInt(CommonStaticClass.getSkip(
+								"q4019b+q4019c+q4019d", "tblMainQues", dbHelper));
+
+						/*
+						 * String v = getSkip("q4019c+q4019d", "tblMainQues");
+						 * String v1 = getSkip("q4019b", "tblMainQues");
+						 */
+
+					}
+					/*
+					 * String v1 = getSkip("q4019b", "tblMainQues");
+					 * if(Integer.parseInt(v1)==1) {
+					 * op.capBngList.add(String.valueOf("T1"));
+					 * op.capEngList.add(String.valueOf("T1")); } else
+					 * if(Integer.parseInt(v1)==2) {
+					 * op.capBngList.add(String.valueOf("T1"));
+					 * op.capEngList.add(String.valueOf("T1"));
+					 * op.capBngList.add(String.valueOf("T2"));
+					 * op.capEngList.add(String.valueOf("T2")); }
+					 */
+					for (int i = 1; i <= iCount; i++) {
+						op.capBngList.add(Integer.toString(i));
+						op.capEngList.add(Integer.toString(i));
+						// op.capBngList.add(String.valueOf("C"+i));
+						// op.capBngList.add(String.valueOf("C"+i));
+
+						op.codeList.add(i);
+
+					}
+					op.capBngList.add(0, "");
+					op.capEngList.add(0, "");
+					op.codeList.add(0, -1);
+					adapterForCombo = new ArrayAdapter(this,
+							android.R.layout.simple_spinner_item, op.capEngList);
+					adapterForCombo
+							.setDropDownViewResource(CommonStaticClass.langBng ? R.layout.checkedspintextview
+									: android.R.layout.simple_spinner_dropdown_item);
+					spinner.setAdapter(adapterForCombo);
+
 				} else {
-					sResCode = "";
+					op = CommonStaticClass.findOptionsForThisQuestion(
+							dbHelper,
+							CommonStaticClass.questionMap.get(
+									CommonStaticClass.currentSLNo).getQvar());
+					op.capBngList.add(0, "");
+					op.capEngList.add(0, "");
+					op.codeList.add(0, -1);
+
+					
+					if (CommonStaticClass.langBng) {
+						//code by imtiaz khan
+						
+							adapterForCombo = new SpinAdapter(this, op.capBngList, true);
+
+					} else {
+						adapterForCombo = new ArrayAdapter(this,
+								android.R.layout.simple_spinner_item, op.capEngList);
+
+					}
+					
+//					adapterForCombo = new ArrayAdapter(this,
+//							android.R.layout.simple_spinner_item, users);
+//					adapterForCombo
+//							.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					
+						
+					adapterForCombo
+							.setDropDownViewResource(CommonStaticClass.langBng ? R.layout.checkedspintextview
+									: android.R.layout.simple_spinner_dropdown_item);
+					
+					spinner.setAdapter(adapterForCombo);
+					// spinner.setOnItemSelectedListener(new
+					// spinItemSelectListener());
 				}
-
 			}
+			// Slected Index change event of Spinner
+			spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-		});
-
-		// if(CommonStaticClass.mode.equalsIgnoreCase(CommonStaticClass.EDITMODE)){
-		// String sql =
-		// "Select "+CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo).getQvar()+" from "+CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo).getTablename()+" where dataid='"+CommonStaticClass.dataId+"'";
-
-		// Data Load
-		String sql = "";
-		if (CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
-				.getQvar().equalsIgnoreCase("memberid"))
-			sql = "Select * from tblFamilyMember where dataid='"
-					+ CommonStaticClass.dataId + "'";// As data should be loaded
-														// from family member
-														// table
-		else {
-			sql = "Select * from "
-					+ CommonStaticClass.questionMap.get(
-							CommonStaticClass.currentSLNo).getTablename()
-					+ " where dataid='" + CommonStaticClass.dataId + "'";
-			Cursor mCursor1 = null;
-			int index = -1;
-			try {
-				mCursor1 = dbHelper.getQueryCursor(sql);
-				if (mCursor1.moveToFirst()) {
-					do {
-						String column = CommonStaticClass.questionMap.get(
-								CommonStaticClass.currentSLNo).getQvar();
-
-						if (mCursor1.getColumnIndex(column) != -1) {
-							String a = mCursor1.getString(mCursor1
-									.getColumnIndex(column)) + "";
-
-							if (CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("userid")
-									|| CommonStaticClass.questionMap
-											.get(CommonStaticClass.currentSLNo)
-											.getQvar()
-											.equalsIgnoreCase("Q17aa")
-
-									|| CommonStaticClass.questionMap
-											.get(CommonStaticClass.currentSLNo)
-											.getQvar().equalsIgnoreCase("q1_1")
-
-									|| CommonStaticClass.questionMap
-											.get(CommonStaticClass.currentSLNo)
-											.getQvar()
-											.equalsIgnoreCase("Q21aa")
-
-									|| CommonStaticClass.questionMap
-											.get(CommonStaticClass.currentSLNo)
-											.getQvar()
-											.equalsIgnoreCase("q1_5aa")
-
-									|| CommonStaticClass.questionMap
-											.get(CommonStaticClass.currentSLNo)
-											.getQvar()
-											.equalsIgnoreCase("c1_8aa")
-
-									|| CommonStaticClass.questionMap
-											.get(CommonStaticClass.currentSLNo)
-											.getQvar()
-											.equalsIgnoreCase("c1_10aa"))
-
-								index = CommonStaticClass
-										.GetIndexFromCollection(userIDs, a);
-							else if (CommonStaticClass.questionMap
-									.get(CommonStaticClass.currentSLNo)
-									.getQvar().equalsIgnoreCase("Q1_7Dist")
-									|| CommonStaticClass.questionMap
-											.get(CommonStaticClass.currentSLNo)
-											.getQvar()
-											.equalsIgnoreCase("Q1_7Thana")
-									|| CommonStaticClass.questionMap
-											.get(CommonStaticClass.currentSLNo)
-											.getQvar()
-											.equalsIgnoreCase("Q1_7Union")
-									|| CommonStaticClass.questionMap
-											.get(CommonStaticClass.currentSLNo)
-											.getQvar()
-											.equalsIgnoreCase("Q1_7Vill")
-									|| CommonStaticClass.questionMap
-											.get(CommonStaticClass.currentSLNo)
-											.getQvar().equalsIgnoreCase("Q1_3")) {
-								ArrayAdapter myAdap = (ArrayAdapter) spinner
-										.getAdapter();
-								int spinnerPosition = myAdap.getPosition(a);
-								spinner.setSelection(spinnerPosition);
-							} else
-								index = CommonStaticClass
-										.GetIndexFromCollection(op.codeList, a);
-
-							if (index != -1)
-								spinner.setSelection(index);
-
+				public void onItemSelected(AdapterView<?> parent, View view,
+						int pos, long id) {
+					// TODO Auto-generated method stub
+					if (parent.getItemAtPosition(pos).toString().length() > 0) {
+						if (CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("q1") 
+								)
+							sResCode = parent
+									.getItemAtPosition(pos)
+									.toString()
+									;
+						
+						else if( CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("q7"))
+						{
+							sResCode = userIDs.get(pos).toString();
 						}
-					} while (mCursor1.moveToNext());
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			} finally {
-				if (mCursor1 != null)
-					mCursor1.close();
-			}
-		}
-		// }
-		// End of addition
-
-		checkBoxHolder.addView(ln, 0, lnlParams);
-
-		prevButton = (Button) v.findViewById(R.id.prevButton);
-		prevButton.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				userPressedPrevious(ParentActivity.this);
-			}
-
-		});
-		saveNxtButton = (Button) v.findViewById(R.id.saveNxtButton);
-		saveNxtButton.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-
-				// TODO Auto-generated method stub
-				if ((CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_7Dist")
-						|| CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q1_7Thana")
-						|| CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q1_7Union")
-						|| CommonStaticClass.questionMap
-								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("Q1_7Vill") || CommonStaticClass.questionMap
-						.get(CommonStaticClass.currentSLNo).getQvar()
-						.equalsIgnoreCase("Q1_3"))
-						&& (spinner.getSelectedItemPosition() == 0)) {
-					return;
-				}
-
-				progressDialog = ProgressDialog.show(con, "Wait",
-						"Please wait while processing next question");
-
-				new Thread() {
-
-					public void run() {
-						try {
-							Looper.prepare();
-							updateTableDataFrmComboBox();
-
-						} catch (Exception lg) {
-							progressDialog.dismiss();
-							CommonStaticClass.showFinalAlert(con,
-									"Data Missing");
-						} finally {
-							progressDialog.dismiss();
+						else
+						{
+							sResCode = op.codeList.get(pos).toString();
+							//sResName = op.capEngList.get(pos).toString();
 						}
-						Looper.loop();
 					}
 
-				}.start();
+				}
 
-				// preserveState();
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+			});
+
+			// if(CommonStaticClass.mode.equalsIgnoreCase(CommonStaticClass.EDITMODE)){
+			// String sql =
+			// "Select "+CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo).getQvar()+" from "+CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo).getTablename()+" where dataid='"+CommonStaticClass.dataId+"'";
+
+			// Data Load
+			String sql = "";
+			if (CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
+					.getQvar().equalsIgnoreCase("memberid"))
+				sql = "Select * from tblFamilyMember where dataid='"
+						+ CommonStaticClass.dataId + "'";// As data should be loaded
+															// from family member
+															// table
+			else {
+				sql = "Select * from "
+						+ CommonStaticClass.questionMap.get(
+								CommonStaticClass.currentSLNo).getTablename()
+						+ " where dataid='" + CommonStaticClass.dataId + "'";
+				Cursor mCursor1 = null;
+				int index = -1;
+				try {
+
+					mCursor1 = dbHelper.getQueryCursor(sql);
+					if (mCursor1.moveToFirst()) {
+						do {
+							String column = CommonStaticClass.questionMap.get(
+									CommonStaticClass.currentSLNo).getQvar();
+
+							if (mCursor1.getColumnIndex(column.toLowerCase()) != -1) {
+								String a = mCursor1.getString(mCursor1
+										.getColumnIndex(column.toLowerCase())) + "";
+
+								if (CommonStaticClass.questionMap
+										.get(CommonStaticClass.currentSLNo)
+										.getQvar().equalsIgnoreCase("userid")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar().equalsIgnoreCase("dist")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("upazilla")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar().equalsIgnoreCase("upa")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar().equalsIgnoreCase("q1_5")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar().equalsIgnoreCase("c1_8")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("c1_10")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("crosscheckby")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("cropfishcode")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("cropfishcode1")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar().equalsIgnoreCase("q011")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("q1")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("q7")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("q62_13"))
+
+									index = CommonStaticClass
+											.GetIndexFromCollection(users, a);
+								
+								else
+									index = CommonStaticClass
+											.GetIndexFromCollection(op.codeList, a);
+
+								if (index != -1)
+									spinner.setSelection(index);
+
+							}
+						} while (mCursor1.moveToNext());
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				} finally {
+					if (mCursor1 != null)
+						mCursor1.close();
+				}
 			}
+			// }
+			// End of addition
 
-		});
+			checkBoxHolder.addView(ln, 0, lnlParams);
 
-		clButton = (Button) v.findViewById(R.id.clButton);
-		clButton.setOnClickListener(new View.OnClickListener() {
+			prevButton = (Button) v.findViewById(R.id.prevButton);
+			prevButton.setOnClickListener(new View.OnClickListener() {
 
-			public void onClick(View vv) {
-				// TODO Auto-generated method stub
-				resetViewGroup((ViewGroup) v);
-			}
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					userPressedPrevious(ParentActivity.this);
+				}
 
-		});
-		notesButton = (Button) v.findViewById(R.id.btnNote);
-		notesButton.setOnClickListener(new OnClickListener() {
+			});
+			saveNxtButton = (Button) v.findViewById(R.id.saveNxtButton);
+			saveNxtButton.setOnClickListener(new View.OnClickListener() {
 
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				FraNotes();
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					updateTableDataFrmComboBox();
+					// preserveState();
+				}
 
-			}
+			});
 
-		});
+			clButton = (Button) v.findViewById(R.id.clButton);
+			clButton.setOnClickListener(new View.OnClickListener() {
 
-	}
+				public void onClick(View vv) {
+					// TODO Auto-generated method stub
+					resetViewGroup((ViewGroup) v);
+				}
+
+			});
+			notesButton = (Button) v.findViewById(R.id.btnNote);
+			notesButton.setOnClickListener(new OnClickListener() {
+
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					FraNotes();
+
+				}
+
+			});
+
+		}
 
 	private void updateTableDataFrmComboBox() {
 		// TODO Auto-generated method stub
