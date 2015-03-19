@@ -13217,6 +13217,11 @@ else {
 							CommonStaticClass.nextQuestion(ParentActivity.this);
 						}
 					}
+					else if(qName.equalsIgnoreCase("qVisit"))
+					{
+						CommonStaticClass.findOutNextSLNo(qName, nextToGo);
+						CommonStaticClass.nextQuestion(ParentActivity.this);
+					}
 
 					else {
 						nullifyWithInRange(qName, nextToGo);
@@ -13684,7 +13689,39 @@ else {
 						.get(CommonStaticClass.currentSLNo).getQnext1()
 						.equalsIgnoreCase("END")) {
 					showUserFinishDialogFrmText();
-				} else {
+				} 
+				else if(qName.equalsIgnoreCase("q_comment"))
+				{
+					if(getChoiceValue("qVisit") == 1)
+					{
+						CommonStaticClass.findOutNextSLNo(
+								qName,"qEnd1");
+						CommonStaticClass.nextQuestion(ParentActivity.this);
+					}
+					else if(getChoiceValue("qVisit") == 2)
+					{
+						CommonStaticClass.findOutNextSLNo(
+								qName,"qEnd2");
+						CommonStaticClass.nextQuestion(ParentActivity.this);
+					}
+					else if(getChoiceValue("qVisit") == 3)
+					{
+						CommonStaticClass.findOutNextSLNo(
+								qName,"qEnd3");
+						CommonStaticClass.nextQuestion(ParentActivity.this);
+					}
+					else
+					{
+						CommonStaticClass.findOutNextSLNo(
+								qName,
+								CommonStaticClass.questionMap.get(
+										CommonStaticClass.currentSLNo).getQnext1());
+						CommonStaticClass.nextQuestion(ParentActivity.this);
+						
+					}
+						
+				}
+					else {
 					// preserveState();
 					CommonStaticClass.findOutNextSLNo(
 							qName,
@@ -17648,5 +17685,41 @@ else {
 	public void FillSpinnerOther(String sql, Spinner spnr) {
 
 	}
+	// code by imtiaz khan
+		public int getChoiceValue(String quesName)
+		{
+			String sql1 = "";
+			int choiceValue = 0;
+			sql1 = "Select "+quesName+" from tblMainQuesSc where dataid='" + CommonStaticClass.dataId + "'";	
+			//sql1 = "Select q5_1,q5_2,q5_3,q5_4,q5_5,q5_6 from tblMainQues where dataid='" + CommonStaticClass.dataId + "'";
+
+			Cursor mCursor1 = null;
+			
+			
+			try {
+				mCursor1 = dbHelper.getQueryCursor(sql1);
+
+				if (mCursor1 != null && mCursor1.getCount() > 0) {
+					
+						mCursor1.moveToFirst();
+						
+						
+							
+								
+							choiceValue = Integer.parseInt(mCursor1.getString(mCursor1.getColumnIndex(quesName)));
+							
+					
+						
+					}	
+				} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				if (mCursor1 != null)
+					mCursor1.close();
+				
+			}
+			return choiceValue;
+		}
 
 }
