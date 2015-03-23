@@ -3094,12 +3094,12 @@ public class ParentActivity extends BaseActivity implements FormListener {
 					CommonStaticClass.currentSLNo).getQvar();
 			if (qAns.length() > 0) {
 
-				if (futureDateValidator(dateYear, dateMonth, dateDay)) {
-					CommonStaticClass
-							.showMyAlert(con, "Not Correct",
-									"You are putting future date which is not acceptable");
-					return;
-				}
+//				if (futureDateValidator(dateYear, dateMonth, dateDay)) {
+//					CommonStaticClass
+//							.showMyAlert(con, "Not Correct",
+//									"You are putting future date which is not acceptable");
+//					return;
+//				}
 
 				String sql = "UPDATE "
 						+ CommonStaticClass.questionMap.get(
