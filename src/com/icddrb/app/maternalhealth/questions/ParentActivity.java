@@ -113,6 +113,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 	ArrayList<String> userIDs = new ArrayList<String>();
 	ArrayAdapter adapterForCombo, adapterForCombo2, adapterForCombo3;
 	private String sResCode = "";
+	
 
 	// frmdate part
 	private EditText pickDate;
@@ -179,6 +180,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 	private ArrayList<String> listvalues = new ArrayList<String>();
 
 	private boolean spinnerOK = true;
+	private int[] checkValues;
 	// frmmultiplechoice
 	private LinkedHashMap<Integer, EditText> edList = new LinkedHashMap<Integer, EditText>();
 
@@ -2285,7 +2287,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 			ln.addView(spinner, 0, layoutParamForSpin);
 			// added by imtiaz khan
 			if (CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
-					.getQvar().equalsIgnoreCase("q1") 
+					.getQvar().equalsIgnoreCase("q3_4") 
 					) {
 
 				// for Reading data from a specific table like user, member etc.
@@ -2300,7 +2302,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 					
 					if (CommonStaticClass.questionMap
 							.get(CommonStaticClass.currentSLNo).getQvar()
-							.equalsIgnoreCase("q1")
+							.equalsIgnoreCase("q3_4")
 
 							) {
 						sql = String.format("select * from tblUser");
@@ -2312,7 +2314,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 						do {
 							if (CommonStaticClass.questionMap
 									.get(CommonStaticClass.currentSLNo).getQvar()
-									.equalsIgnoreCase("q1"))
+									.equalsIgnoreCase("q3_4"))
 
 							{
 								users.add(mCursor.getString(mCursor
@@ -2513,7 +2515,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 					if (parent.getItemAtPosition(pos).toString().length() > 0) {
 						if (CommonStaticClass.questionMap
 								.get(CommonStaticClass.currentSLNo).getQvar()
-								.equalsIgnoreCase("q1") 
+								.equalsIgnoreCase("q3_4") 
 								)
 							sResCode = parent
 									.getItemAtPosition(pos)
@@ -2532,6 +2534,8 @@ public class ParentActivity extends BaseActivity implements FormListener {
 							//sResName = op.capEngList.get(pos).toString();
 						}
 					}
+					else 
+						sResCode = "";
 
 				}
 
@@ -2620,7 +2624,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 										|| CommonStaticClass.questionMap
 												.get(CommonStaticClass.currentSLNo)
 												.getQvar()
-												.equalsIgnoreCase("q1")
+												.equalsIgnoreCase("q3_4")
 										|| CommonStaticClass.questionMap
 												.get(CommonStaticClass.currentSLNo)
 												.getQvar()
@@ -2700,6 +2704,13 @@ public class ParentActivity extends BaseActivity implements FormListener {
 
 	private void updateTableDataFrmComboBox() {
 		// TODO Auto-generated method stub
+		if(sResCode.equalsIgnoreCase(""))
+		{
+			CommonStaticClass
+			.showMyAlert(con, "Notification",
+					"Please Select an Item");
+			return;
+		}
 		try {
 			String sql = "";
 			if ((CommonStaticClass.questionMap
@@ -7862,8 +7873,10 @@ public class ParentActivity extends BaseActivity implements FormListener {
 			aaa.add(-1);
 		}
 
+		checkValues = new int[op.codeList.size()];
 		// op.codeList.toArray().
 		for (int i = 0; i < op.codeList.size(); i++) {
+			
 
 			Log.e("op.qidList.get(i)", op.qidList.get(i));
 			if (op.qidList.get(i).contains("Options")) {
@@ -7926,9 +7939,11 @@ public class ParentActivity extends BaseActivity implements FormListener {
 								Log.e("id :", "" + checkButton.getId());
 								spinner.setSelection(0);
 								spinner.setVisibility(View.VISIBLE);
+								checkValues[checkButton.getId()] = 1;
 							} else {
 								aaa.set(checkButton.getId(), -1);// added by me
 								spinner.setVisibility(View.INVISIBLE);
+								checkValues[checkButton.getId()] = 0;
 							}
 						}
 					});
@@ -8289,6 +8304,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 									.parseInt(a));
 
 							checkButton.setChecked(true);
+							checkValues[checkButton.getId()] = 1;
 							spinner.setSelection(pos);
 							dataOk = true;
 
@@ -8428,6 +8444,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 	private void updateTableDataFrmMultipleCheckCombo(ViewGroup v) {
 		// TODO Auto-generated method stub
 		boolean otherCheck = false;
+		boolean noComboValue = false;
 		spinnerOK = true;
 		CheckBoxNotSeletedFrmMultipleCheckCombo();
 		if (spinnerOK) {
@@ -8436,6 +8453,76 @@ public class ParentActivity extends BaseActivity implements FormListener {
 		String sql = "";
 		// spinnerOK = true;
 //		if (spinnerOK) {
+		
+		//code by imtiaz khan
+		if(CommonStaticClass.questionMap
+		.get(CommonStaticClass.currentSLNo).getQvar().equalsIgnoreCase("q_639"))
+		{
+			if(aaa.get(0) == -1 || aaa.get(1) == -1
+					|| aaa.get(2) == -1
+					|| aaa.get(3) == -1
+					)
+			{
+				CommonStaticClass.showMyAlert(con, "ALERT",
+						"You need to select all items in order to proceed");
+				return;
+			}
+		}
+		else if(CommonStaticClass.questionMap
+				.get(CommonStaticClass.currentSLNo).getQvar().equalsIgnoreCase("q_708"))
+		{
+			if(aaa.get(0) == -1 || aaa.get(1) == -1
+					|| aaa.get(2) == -1
+					
+					)
+			{
+				CommonStaticClass.showMyAlert(con, "ALERT",
+						"You need to select all items in order to proceed");
+				return;
+			}
+		}
+		else if(CommonStaticClass.questionMap
+				.get(CommonStaticClass.currentSLNo).getQvar().equalsIgnoreCase("q_801"))
+		{
+			if(aaa.get(0) == -1 || aaa.get(1) == -1
+					|| aaa.get(2) == -1
+					|| aaa.get(3) == -1
+					
+					)
+			{
+				CommonStaticClass.showMyAlert(con, "ALERT",
+						"You need to select all items in order to proceed");
+				return;
+			}
+		}
+		else if(CommonStaticClass.questionMap
+				.get(CommonStaticClass.currentSLNo).getQvar().equalsIgnoreCase("q_803"))
+		{
+			if(aaa.get(0) == -1 || aaa.get(1) == -1
+					|| aaa.get(2) == -1
+					|| aaa.get(3) == -1
+					|| aaa.get(4) == -1
+					|| aaa.get(5) == -1
+					|| aaa.get(6) == -1
+					
+					)
+			{
+				CommonStaticClass.showMyAlert(con, "ALERT",
+						"You need to select all items in order to proceed");
+				return;
+			}
+		}
+		
+		for (int i = 0; i < op.codeList.size(); i++) {
+			if(op.qidList.get(i).contains("Options"))
+				break;
+			if(checkValues[i] == 1 && aaa.get(i) ==-1 )
+			{
+				CommonStaticClass.showMyAlert(con, "Alert", "Must choose option for every selected checkbox");
+				return;
+			}
+			
+		}
 
 			sql = "UPDATE "
 					+ CommonStaticClass.questionMap.get(
@@ -9252,29 +9339,37 @@ public class ParentActivity extends BaseActivity implements FormListener {
 				LinkedHashMap.Entry<Integer, EditText> pairs = (LinkedHashMap.Entry<Integer, EditText>) it
 						.next();
 				if (pairs.getValue().getVisibility() == View.VISIBLE) {
-					if (pairs.getValue().getText().toString().length() > 0) {
-						String sq = "";
-						if (!CommonStaticClass.isMember)
-							sq = "UPDATE "
-									+ CommonStaticClass.questionMap.get(
-											CommonStaticClass.currentSLNo)
-											.getTablename() + " SET "
-									+ op.qnList.get(pairs.getKey()) + " = '"
-									+ pairs.getValue().getText().toString()
-									+ "' where dataid='"
-									+ CommonStaticClass.dataId + "'";
-						else
-							sq = "UPDATE "
-									+ CommonStaticClass.questionMap.get(
-											CommonStaticClass.currentSLNo)
-											.getTablename() + " SET "
-									+ op.qnList.get(pairs.getKey()) + " = '"
-									+ pairs.getValue().getText().toString()
-									+ "' where dataid='"
-									+ CommonStaticClass.dataId
-									+ "' and memberid="
-									+ CommonStaticClass.memberID;
-						dbHelper.executeDMLQuery(sq);
+					if(pairs.getValue().getText().toString().isEmpty())
+					{
+						CommonStaticClass.showMyAlert(con, "Alert", "Please Specify Other");
+						return;
+					}
+					else{
+						if (pairs.getValue().getText().toString().length() > 0) {
+							String sq = "";
+							if (!CommonStaticClass.isMember)
+							
+								sq = "UPDATE "
+										+ CommonStaticClass.questionMap.get(
+												CommonStaticClass.currentSLNo)
+												.getTablename() + " SET "
+										+ op.qnList.get(pairs.getKey()) + " = '"
+										+ pairs.getValue().getText().toString()
+										+ "' where dataid='"
+										+ CommonStaticClass.dataId + "'";
+							else
+								sq = "UPDATE "
+										+ CommonStaticClass.questionMap.get(
+												CommonStaticClass.currentSLNo)
+												.getTablename() + " SET "
+										+ op.qnList.get(pairs.getKey()) + " = '"
+										+ pairs.getValue().getText().toString()
+										+ "' where dataid='"
+										+ CommonStaticClass.dataId
+										+ "' and memberid="
+										+ CommonStaticClass.memberID;
+							dbHelper.executeDMLQuery(sq);
+						}
 					} /*
 					 * else { CommonStaticClass .showMyAlert(con,
 					 * "Field is empty",
@@ -11759,14 +11854,14 @@ else {
 
 	}
 
-	private void setDataFromFrmNumericTwo(EditText infoText, String q1,
+	private void setDataFromFrmNumericTwo(EditText infoText, String q3_4,
 			String q2, String table) {
 		// TODO Auto-generated method stub
-		String sql1 = "Select " + q1 + " from " + table + " where dataid='"
+		String sql1 = "Select " + q3_4 + " from " + table + " where dataid='"
 				+ CommonStaticClass.dataId + "'";
 		String sql2 = "Select " + q2 + " from " + table + " where dataid='"
 				+ CommonStaticClass.dataId + "'";
-		float value = dataFromFrmNumericTwo(sql1, q1)
+		float value = dataFromFrmNumericTwo(sql1, q3_4)
 				- dataFromFrmNumericTwo(sql2, q2);
 		infoText.setText(value + "");
 
