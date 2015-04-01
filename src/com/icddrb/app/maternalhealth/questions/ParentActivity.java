@@ -7153,7 +7153,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 							"Household ID is inconsistent");
 					return;
 				}*/
-				if (mother.length() < 2) { // As if (Integer.valueOf(mother) >
+				if (mother.length() < 1) { // As if (Integer.valueOf(mother) >
 											// 8) length cannot be 2 digit
 					CommonStaticClass.showFinalAlert(con,
 							"Mother ID is inconsistent");
@@ -13785,37 +13785,7 @@ else {
 						.equalsIgnoreCase("END")) {
 					showUserFinishDialogFrmText();
 				} 
-				else if(qName.equalsIgnoreCase("q_comment"))
-				{
-					if(getChoiceValue("qVisit") == 1)
-					{
-						CommonStaticClass.findOutNextSLNo(
-								qName,"qEnd1");
-						CommonStaticClass.nextQuestion(ParentActivity.this);
-					}
-					else if(getChoiceValue("qVisit") == 2)
-					{
-						CommonStaticClass.findOutNextSLNo(
-								qName,"qEnd2");
-						CommonStaticClass.nextQuestion(ParentActivity.this);
-					}
-					else if(getChoiceValue("qVisit") == 3)
-					{
-						CommonStaticClass.findOutNextSLNo(
-								qName,"qEnd3");
-						CommonStaticClass.nextQuestion(ParentActivity.this);
-					}
-					else
-					{
-						CommonStaticClass.findOutNextSLNo(
-								qName,
-								CommonStaticClass.questionMap.get(
-										CommonStaticClass.currentSLNo).getQnext1());
-						CommonStaticClass.nextQuestion(ParentActivity.this);
-						
-					}
-						
-				}
+				
 					else {
 					// preserveState();
 					CommonStaticClass.findOutNextSLNo(
