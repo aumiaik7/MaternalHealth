@@ -8512,6 +8512,22 @@ public class ParentActivity extends BaseActivity implements FormListener {
 				return;
 			}
 		}
+		else if(CommonStaticClass.questionMap
+				.get(CommonStaticClass.currentSLNo).getQvar().equalsIgnoreCase("q_410"))
+		{
+			if(aaa.get(0) == -1 || aaa.get(1) == -1
+					|| aaa.get(2) == -1
+					|| aaa.get(3) == -1
+					|| aaa.get(4) == -1
+					
+					
+					)
+			{
+				CommonStaticClass.showMyAlert(con, "ALERT",
+						"You need to select all items in order to proceed");
+				return;
+			}
+		}
 		
 		for (int i = 0; i < op.codeList.size(); i++) {
 			if(op.qidList.get(i).contains("Options"))
@@ -9376,6 +9392,20 @@ public class ParentActivity extends BaseActivity implements FormListener {
 					 * "Please put correct information in field to proceed");
 					 * return; }
 					 */
+				}
+			}
+			
+			if(qName.equalsIgnoreCase("q_813"))
+			{
+				
+							
+				if(aaa.get(6) == 1 && (aaa.get(0) == 1 || 
+						aaa.get(1) == 1 || aaa.get(2) == 1 || 
+						aaa.get(3) == 1 || aaa.get(4) == 1 || aaa.get(5) == 1))
+				{
+					CommonStaticClass.showMyAlert(con, "Alert!!!",
+							"If \"No One\" is checked other options cannot be checked");
+					return;
 				}
 			}
 
@@ -11289,11 +11319,11 @@ else {
 				return;
 					
 			}
-			else if (( qName.equalsIgnoreCase("q_110") || qName.equalsIgnoreCase("q_704")) 
-					&& Integer.parseInt(qAns) >35) {
+			else if (( qName.equalsIgnoreCase("q_110") ) 
+					&& Integer.parseInt(qAns) >18) {
 				
 		    	CommonStaticClass.showMyAlert(con, "Message",
-							"Invalid Input Please give input not more than 35");
+							"Invalid Input Please give input not more than 18");
 					
 				return;
 						
@@ -11304,6 +11334,15 @@ else {
 				
 				CommonStaticClass.showMyAlert(con, "Message",
 								"Invalid Input Please give input either 98 or not more than 10");
+				return;
+					
+			}
+			else if (qName.equalsIgnoreCase("q_704")
+					&& Integer.parseInt(qAns) >18 
+					&& Integer.parseInt(qAns) !=88 ) {
+				
+				CommonStaticClass.showMyAlert(con, "Message",
+								"Invalid Input Please give input either 88 or not more than 18");
 				return;
 					
 			}
@@ -11393,6 +11432,14 @@ else {
 					
 				return;
 						
+			}
+			else if (qName.equalsIgnoreCase("q_811") 
+					&& Integer.parseInt(qAns) >10 ) {
+				
+				CommonStaticClass.showMyAlert(con, "Message",
+								"Invalid Input Please give input not more than 10");
+				return;
+					
 			}
 			
 		   else if (qName.equalsIgnoreCase("q_905_a_time") 
@@ -11496,8 +11543,17 @@ else {
 			
 			if (dbHelper.executeDMLQuery(sql)) {
 				
+				if(qName.equalsIgnoreCase("q_122") && (Integer.valueOf(qAns) == 98) )
+				{
+					CommonStaticClass.findOutNextSLNo(
+							CommonStaticClass.questionMap.get(
+									CommonStaticClass.currentSLNo).getQvar(),
+							"q_124");
+					CommonStaticClass.nextQuestion(ParentActivity.this);
+					
+				}
 				//Check For 0 -Do you have any children aged between 5 and 12 years?  How many? (include 5-year-old and 12-year-old children)
-				if(qName.equalsIgnoreCase("q_407") && (Integer.valueOf(qAns) == 0) )
+				else if(qName.equalsIgnoreCase("q_407") && (Integer.valueOf(qAns) == 0) )
 				{
 					CommonStaticClass.findOutNextSLNo(
 							CommonStaticClass.questionMap.get(
@@ -13247,8 +13303,8 @@ else {
 					{
 						if(CommonStaticClass.checkFor11BallNotChecked(dbHelper) )
 						{
-							nullifyWithInRange(qName, "q_1111");
-							CommonStaticClass.findOutNextSLNo(qName, "q_1111");
+							nullifyWithInRange(qName, "q_1108");
+							CommonStaticClass.findOutNextSLNo(qName, "q_1108");
 							CommonStaticClass.nextQuestion(ParentActivity.this);
 						}
 						else
