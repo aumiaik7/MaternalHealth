@@ -2288,6 +2288,10 @@ public class ParentActivity extends BaseActivity implements FormListener {
 			// added by imtiaz khan
 			if (CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
 					.getQvar().equalsIgnoreCase("q3_4") 
+					|| CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
+					.getQvar().equalsIgnoreCase("qSup") 
+					|| CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
+					.getQvar().equalsIgnoreCase("qField") 
 					) {
 
 				// for Reading data from a specific table like user, member etc.
@@ -2303,6 +2307,10 @@ public class ParentActivity extends BaseActivity implements FormListener {
 					if (CommonStaticClass.questionMap
 							.get(CommonStaticClass.currentSLNo).getQvar()
 							.equalsIgnoreCase("q3_4")
+							|| CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
+							.getQvar().equalsIgnoreCase("qSup") 
+							|| CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
+							.getQvar().equalsIgnoreCase("qField") 
 
 							) {
 						sql = String.format("select * from tblUser");
@@ -2314,7 +2322,11 @@ public class ParentActivity extends BaseActivity implements FormListener {
 						do {
 							if (CommonStaticClass.questionMap
 									.get(CommonStaticClass.currentSLNo).getQvar()
-									.equalsIgnoreCase("q3_4"))
+									.equalsIgnoreCase("q3_4")
+									|| CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
+									.getQvar().equalsIgnoreCase("qSup") 
+									|| CommonStaticClass.questionMap.get(CommonStaticClass.currentSLNo)
+									.getQvar().equalsIgnoreCase("qField") )
 
 							{
 								users.add(mCursor.getString(mCursor
@@ -2528,6 +2540,21 @@ public class ParentActivity extends BaseActivity implements FormListener {
 						{
 							sResCode = userIDs.get(pos).toString();
 						}
+						else if( CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("qSup")
+								|| CommonStaticClass.questionMap
+								.get(CommonStaticClass.currentSLNo).getQvar()
+								.equalsIgnoreCase("qField"))
+						{
+							sResCode = parent
+									.getItemAtPosition(pos)
+									.toString()
+									.substring(
+											0,
+											(parent.getItemAtPosition(pos)
+													.toString().lastIndexOf(":") - 1));
+						}
 						else
 						{
 							sResCode = op.codeList.get(pos).toString();
@@ -2636,6 +2663,89 @@ public class ParentActivity extends BaseActivity implements FormListener {
 
 									index = CommonStaticClass
 											.GetIndexFromCollection(users, a);
+								
+								else
+									index = CommonStaticClass
+											.GetIndexFromCollection(op.codeList, a);
+
+								if (index != -1)
+									spinner.setSelection(index);
+
+							}
+							else if (mCursor1.getColumnIndex(column) != -1) {
+								String a = mCursor1.getString(mCursor1
+										.getColumnIndex(column)) + "";
+
+								if (CommonStaticClass.questionMap
+										.get(CommonStaticClass.currentSLNo)
+										.getQvar().equalsIgnoreCase("userid")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar().equalsIgnoreCase("dist")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("upazilla")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar().equalsIgnoreCase("upa")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar().equalsIgnoreCase("q1_5")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar().equalsIgnoreCase("c1_8")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("c1_10")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("crosscheckby")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("cropfishcode")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("cropfishcode1")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar().equalsIgnoreCase("q011")
+
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("q3_4")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("q7")
+										|| CommonStaticClass.questionMap
+												.get(CommonStaticClass.currentSLNo)
+												.getQvar()
+												.equalsIgnoreCase("q62_13"))
+
+									index = CommonStaticClass
+											.GetIndexFromCollection(users, a);
+								else if(CommonStaticClass.questionMap
+										.get(CommonStaticClass.currentSLNo).getQvar()
+										.equalsIgnoreCase("qSup")
+										|| CommonStaticClass.questionMap
+										.get(CommonStaticClass.currentSLNo).getQvar()
+										.equalsIgnoreCase("qField")
+										)
+								{
+									index = CommonStaticClass
+											.GetIndexFromCollection(userIDs, a);
+								}
 								
 								else
 									index = CommonStaticClass
