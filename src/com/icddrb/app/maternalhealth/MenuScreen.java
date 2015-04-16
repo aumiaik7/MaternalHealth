@@ -64,18 +64,28 @@ public class MenuScreen extends BaseActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//CommonStaticClass.mode = CommonStaticClass.EDITMODE;
-				Intent i = new Intent();
-//				i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
-//						+ ".EditEntry");
-				i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
-						+ ".EditEntry");
-				startActivity(i);
-				
-//				CommonStaticClass.mode = CommonStaticClass.EDITMODE;
 //				Intent i = new Intent();
 //				i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
 //						+ ".EditEntry");
+//				i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+//						+ ".EditEntry");
 //				startActivity(i);
+				
+				///prev flat mode
+				/*CommonStaticClass.mode = CommonStaticClass.EDITMODE;
+				Intent i = new Intent();
+				i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+						+ ".EditEntry");
+				startActivity(i);*/
+				
+				
+				
+				
+				Intent i = new Intent();
+				i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+						+ ".subedit");
+				startActivity(i);
+	
 			}
 
 		});

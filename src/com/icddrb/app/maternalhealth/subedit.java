@@ -31,8 +31,8 @@ public class subedit extends BaseActivity {
 	}
 
 
-	public void ClickbtnEAdults(View v) {
-		CommonStaticClass.subEdit = "Adults";
+	public void Clicksec1(View v) {
+		CommonStaticClass.subEdit = "sec01";
 		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
 		Intent i = new Intent();
 		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
@@ -41,8 +41,8 @@ public class subedit extends BaseActivity {
 		//finish();
 	}
 
-	public void ClickbtnbtnEAdultsDischarge(View v) {
-		CommonStaticClass.subEdit = "AdultsDischarge";
+	public void Clicksec2(View v) {
+		CommonStaticClass.subEdit = "sec02";
 		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
 		Intent i = new Intent();
 		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
@@ -51,8 +51,8 @@ public class subedit extends BaseActivity {
 		//finish();
 	}
 
-	public void ClickbtnENeonates(View v) {
-		CommonStaticClass.subEdit = "Neonates";
+	public void Clicksec3(View v) {
+		CommonStaticClass.subEdit = "sec03";
 		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
 		Intent i = new Intent();
 		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
@@ -61,8 +61,98 @@ public class subedit extends BaseActivity {
 		//finish();
 	}
 
-	public void ClickbtnENeonatesDischarge(View v) {
-		CommonStaticClass.subEdit = "NeonatesDischarge";
+	public void Clicksec4(View v) {
+		CommonStaticClass.subEdit = "sec04";
+		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
+		Intent i = new Intent();
+		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+				+ ".EditEntry");
+		startActivity(i);
+		//finish();
+	}
+	
+	public void Clicksec5(View v) {
+		CommonStaticClass.subEdit = "sec05";
+		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
+		Intent i = new Intent();
+		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+				+ ".EditEntry");
+		startActivity(i);
+		//finish();
+	}
+	
+	public void Clicksec6(View v) {
+		CommonStaticClass.subEdit = "sec06";
+		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
+		Intent i = new Intent();
+		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+				+ ".EditEntry");
+		startActivity(i);
+		//finish();
+	}
+	
+	public void Clicksec7(View v) {
+		CommonStaticClass.subEdit = "sec07";
+		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
+		Intent i = new Intent();
+		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+				+ ".EditEntry");
+		startActivity(i);
+		//finish();
+	}
+	
+	public void Clicksec8(View v) {
+		CommonStaticClass.subEdit = "sec08";
+		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
+		Intent i = new Intent();
+		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+				+ ".EditEntry");
+		startActivity(i);
+		//finish();
+	}
+	
+	public void Clicksec9(View v) {
+		CommonStaticClass.subEdit = "sec09";
+		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
+		Intent i = new Intent();
+		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+				+ ".EditEntry");
+		startActivity(i);
+		//finish();
+	}
+	
+	public void Clicksec10(View v) {
+		CommonStaticClass.subEdit = "sec10";
+		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
+		Intent i = new Intent();
+		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+				+ ".EditEntry");
+		startActivity(i);
+		//finish();
+	}
+	
+	public void Clicksec11(View v) {
+		CommonStaticClass.subEdit = "sec11";
+		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
+		Intent i = new Intent();
+		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+				+ ".EditEntry");
+		startActivity(i);
+		//finish();
+	}
+	
+	public void Clicksec12(View v) {
+		CommonStaticClass.subEdit = "sec12";
+		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
+		Intent i = new Intent();
+		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName
+				+ ".EditEntry");
+		startActivity(i);
+		//finish();
+	}
+	
+	public void Clicksec13(View v) {
+		CommonStaticClass.subEdit = "sec13";
 		CommonStaticClass.mode = CommonStaticClass.EDITMODE;
 		Intent i = new Intent();
 		i.setClassName(CommonStaticClass.pName, CommonStaticClass.pName

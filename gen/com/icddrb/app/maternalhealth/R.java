@@ -45,12 +45,12 @@ containing a value of this type.
         public static final int unreadborder=0x7f020007;
     }
     public static final class id {
-        public static final int AddMenuItem=0x7f090187;
-        public static final int BNGMenuItem=0x7f090183;
-        public static final int ENGMenuItem=0x7f090184;
-        public static final int EditMenuItem=0x7f090188;
-        public static final int ExitItem=0x7f090185;
-        public static final int GotoHomeItem=0x7f090186;
+        public static final int AddMenuItem=0x7f090190;
+        public static final int BNGMenuItem=0x7f09018c;
+        public static final int ENGMenuItem=0x7f09018d;
+        public static final int EditMenuItem=0x7f090191;
+        public static final int ExitItem=0x7f09018e;
+        public static final int GotoHomeItem=0x7f09018f;
         public static final int LinearLayout03=0x7f090065;
         public static final int LinearLayout04=0x7f09006a;
         public static final int LinearLayout06=0x7f09006b;
@@ -86,10 +86,19 @@ containing a value of this type.
         public static final int btnAdults=0x7f09005f;
         public static final int btnAdultsDischarge=0x7f090060;
         public static final int btnCancel=0x7f0900e7;
-        public static final int btnEAdults=0x7f09017f;
-        public static final int btnEAdultsDischarge=0x7f090180;
-        public static final int btnENeonates=0x7f090181;
-        public static final int btnENeonatesDischarge=0x7f090182;
+        public static final int btnEsec01=0x7f09017f;
+        public static final int btnEsec02=0x7f090180;
+        public static final int btnEsec03=0x7f090181;
+        public static final int btnEsec04=0x7f090182;
+        public static final int btnEsec05=0x7f090183;
+        public static final int btnEsec06=0x7f090184;
+        public static final int btnEsec07=0x7f090185;
+        public static final int btnEsec08=0x7f090186;
+        public static final int btnEsec09=0x7f090187;
+        public static final int btnEsec10=0x7f090188;
+        public static final int btnEsec11=0x7f090189;
+        public static final int btnEsec12=0x7f09018a;
+        public static final int btnEsec13=0x7f09018b;
         public static final int btnGetGPS=0x7f090149;
         public static final int btnHome=0x7f090063;
         public static final int btnNeonates=0x7f090061;
