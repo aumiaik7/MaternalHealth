@@ -7898,6 +7898,25 @@ public class ParentActivity extends BaseActivity implements FormListener {
 				CommonStaticClass.findOutNextSLNo(qName, "q_1005");
 				CommonStaticClass.nextQuestion(ParentActivity.this);
 			}
+			else if(CommonStaticClass.checkFor8AallNotChecked(dbHelper) && CommonStaticClass.checkFor8BallNotChecked(dbHelper))
+			{
+			
+				
+				CommonStaticClass.findOutNextSLNo(qName, "msg1101");
+				CommonStaticClass.nextQuestion(ParentActivity.this);
+				new Thread() {
+
+					public void run() {
+						//Looper.prepare();
+						nullifyWithInRange(qName, "msg1101");
+
+//						Message msg = new Message();
+//						msg.what = UPDATEDONE;
+//						handler.sendMessage(msg);
+//						Looper.loop();
+					}
+				}.start();
+			}
 			else
 			{
 				
@@ -8566,6 +8585,19 @@ public class ParentActivity extends BaseActivity implements FormListener {
 		
 		//code by imtiaz khan
 		if(CommonStaticClass.questionMap
+				.get(CommonStaticClass.currentSLNo).getQvar().equalsIgnoreCase("q_206"))
+				{
+					if(aaa.get(0) == -1 || aaa.get(1) == -1
+							|| aaa.get(2) == -1
+							
+							)
+					{
+						CommonStaticClass.showMyAlert(con, "ALERT",
+								"You need to select all items in order to proceed");
+						return;
+					}
+				}
+		else if(CommonStaticClass.questionMap
 		.get(CommonStaticClass.currentSLNo).getQvar().equalsIgnoreCase("q_639"))
 		{
 			if(aaa.get(0) == -1 || aaa.get(1) == -1
@@ -8665,12 +8697,16 @@ public class ParentActivity extends BaseActivity implements FormListener {
 					sql += op.qidList.get(i) + " = '" + aaa.get(i) + "'";
 					break;
 				}
-				if(op.qidList.get(i).equalsIgnoreCase("q_708_3") 
+				if(op.qidList.get(i).equalsIgnoreCase("q_116_yes_7") 
 						|| op.qidList.get(i).equalsIgnoreCase("q_903_10") 
 						|| op.qidList.get(i).equalsIgnoreCase("q_1102_17")
 						|| op.qidList.get(i).equalsIgnoreCase("q_1214_11"))
 				{
 					if(aaa.get(i) != -1)
+					otherCheck  = true;
+				}
+				else if (op.qidList.get(i).equalsIgnoreCase("q_708_3") && aaa.get(i) == 1)
+				{
 					otherCheck  = true;
 				}
 				sql += op.qidList.get(i) + " = '" + aaa.get(i) + "',";
@@ -8698,6 +8734,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 													.getQvar()+"_other");
 							CommonStaticClass.nextQuestion(ParentActivity.this);
 						}
+						
 						else
 						{
 							CommonStaticClass.findOutNextSLNo(
