@@ -494,58 +494,58 @@ public class QListScreenForEdit extends BaseActivity {
 		
 		if (CommonStaticClass.subEdit.equalsIgnoreCase("sec06")) {
 			if (!CommonStaticClass.isMember)
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 137 and SLNo <= 177)  order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 137 and SLNo <= 178)  order by SLNo asc";
 			else
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 137 and SLNo <= 177) order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 137 and SLNo <= 178) order by SLNo asc";
 			}
 		
 		if (CommonStaticClass.subEdit.equalsIgnoreCase("sec07")) {
 			if (!CommonStaticClass.isMember)
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 178 and SLNo <= 194)  order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 179 and SLNo <= 196)  order by SLNo asc";
 			else
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 178 and SLNo <= 194) order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 179 and SLNo <= 196) order by SLNo asc";
 			}
 		
 		if (CommonStaticClass.subEdit.equalsIgnoreCase("sec08")) {
 			if (!CommonStaticClass.isMember)
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 195 and SLNo <= 256)  order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 197 and SLNo <= 258)  order by SLNo asc";
 			else
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 195 and SLNo <= 256) order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 197 and SLNo <= 258) order by SLNo asc";
 			}
 		
 		if (CommonStaticClass.subEdit.equalsIgnoreCase("sec09")) {
 			if (!CommonStaticClass.isMember)
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 257 and SLNo <= 271)  order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 259 and SLNo <= 273)  order by SLNo asc";
 			else
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 257 and SLNo <= 271) order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 259 and SLNo <= 273) order by SLNo asc";
 			}
 		
 		if (CommonStaticClass.subEdit.equalsIgnoreCase("sec10")) {
 			if (!CommonStaticClass.isMember)
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 272 and SLNo <= 326)  order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 274 and SLNo <= 328)  order by SLNo asc";
 			else
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 272 and SLNo <= 326) order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 274 and SLNo <= 328) order by SLNo asc";
 			}
 		
 		if (CommonStaticClass.subEdit.equalsIgnoreCase("sec11")) {
 			if (!CommonStaticClass.isMember)
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 327 and SLNo <= 392)  order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 329 and SLNo <= 394)  order by SLNo asc";
 			else
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 327 and SLNo <= 392) order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 329 and SLNo <= 394) order by SLNo asc";
 			}
 		
 		if (CommonStaticClass.subEdit.equalsIgnoreCase("sec12")) {
 			if (!CommonStaticClass.isMember)
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 393 and SLNo <= 420)  order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where (SLNo >= 395 and SLNo <= 422)  order by SLNo asc";
 			else
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 393 and SLNo <= 420) order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where (SLNo >= 395 and SLNo <= 422) order by SLNo asc";
 			}
 		
 		if (CommonStaticClass.subEdit.equalsIgnoreCase("sec13")) {
 			if (!CommonStaticClass.isMember)
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where  SLNo >=421   order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  where  SLNo >=423   order by SLNo asc";
 			else
-				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where SLNo >=421 order by SLNo asc";
+				sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion where SLNo >=423 order by SLNo asc";
 			}
 		//sql = "Select SLNo,Qvar,Qdescbng,Qdesceng from tblQuestion  order by SLNo asc";
 		Cursor mCursor = null;

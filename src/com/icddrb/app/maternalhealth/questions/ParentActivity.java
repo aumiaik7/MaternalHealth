@@ -7263,7 +7263,7 @@ public class ParentActivity extends BaseActivity implements FormListener {
 							"Household ID is inconsistent");
 					return;
 				}*/
-				if (mother.length() < 1) { // As if (Integer.valueOf(mother) >
+				if (mother.length() < 2) { // As if (Integer.valueOf(mother) >
 											// 8) length cannot be 2 digit
 					CommonStaticClass.showFinalAlert(con,
 							"Mother ID is inconsistent");
@@ -13430,7 +13430,7 @@ else {
 					{
 						if(CommonStaticClass.checkFor11AallNotChecked(dbHelper) )
 						{
-							nullifyWithInRange(qName, "q_1103");
+							//nullifyWithInRange(qName, "q_1103");
 							CommonStaticClass.findOutNextSLNo(qName, "q_1103");
 							CommonStaticClass.nextQuestion(ParentActivity.this);
 						}
@@ -13450,7 +13450,7 @@ else {
 					{
 						if(CommonStaticClass.checkFor11BallNotChecked(dbHelper) )
 						{
-							nullifyWithInRange(qName, "q_1108");
+							//nullifyWithInRange(qName, "q_1108");
 							CommonStaticClass.findOutNextSLNo(qName, "q_1108");
 							CommonStaticClass.nextQuestion(ParentActivity.this);
 						}
@@ -13522,6 +13522,10 @@ else {
 					}
 
 					else {
+						if(!(qName.equalsIgnoreCase("q_1112")
+								||qName.equalsIgnoreCase("q_1113") 
+								||  qName.equalsIgnoreCase("q_1125")
+								||  qName.equalsIgnoreCase("q_1123")))
 						nullifyWithInRange(qName, nextToGo);
 						CommonStaticClass.findOutNextSLNo(qName, nextToGo);
 						CommonStaticClass.nextQuestion(ParentActivity.this);
